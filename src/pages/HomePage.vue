@@ -10,6 +10,8 @@ const getPlantsLocal = () => {
   const plantsDataJson = document.querySelector('#plants-data')?.dataset?.json
   const plantsDataJsonParsed = plantsDataJson && JSON.parse(plantsDataJson)
 
+  console.log('Trying to get plants. Plants local is: ', plantsDataJsonParsed)
+
   return plantsDataJsonParsed
 }
 
@@ -31,6 +33,7 @@ onServerPrefetch(async () => {
 })
 
 onMounted(async () => {
+  console.log('plants.value onMounted', plants.value)
   if (!plants.value) {
     plants.value = getPlantsLocal() || (await fetchPlants())
   }
