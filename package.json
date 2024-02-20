@@ -1,5 +1,5 @@
 {
-  "name": "vite-vue-ssr",
+  "name": "vite-vue-ssg",
   "private": true,
   "version": "0.0.0",
   "type": "module",
