@@ -59,7 +59,7 @@ Go to the **Content** section in your space, then click on **Add entry** and sel
 
 From your contentful space, go to **Settings > API keys**. Create a new API key.
 
-If you ran `npm run setup` a `.env` file was created for you. If not, create a `.env` file (which will be ignored by Git):
+Create a `.env` file (which will be ignored by Git):
 
 Then set each variable in `.env`:
 
@@ -90,6 +90,6 @@ To deploy, run the following command and commit your changes to GitHub.
 npm run build
 ```
 
-Chose your favorite hosting provider such as Netlify or Vercel and create a new project.
+Chose Vercel as your hosting provider and create a new project.
 
 **NOTE:** You'll have to configure the **_VITE_CONTENTFUL_SPACE_ID_** and **_VITE_CONTENTFUL_ACCESS_TOKEN_** values.
