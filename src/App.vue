@@ -1,40 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onServerPrefetch, onMounted } from 'vue'
 
-const getPlantsLocal = () => {
-  if (import.meta.env.SSR) {
-    return
-  }
-
-  const plantsDataJson = document.querySelector('#plants-data')?.dataset?.json
-  const plantsDataJsonParsed = plantsDataJson && JSON.parse(plantsDataJson)
-
-  return plantsDataJsonParsed
-}
-
-const plants = ref(getPlantsLocal())
-
-const fetchPlants = async () => {
-  try {
-    const plants = await fetch(import.meta.env.VITE_ROOT + '/api/plants').then((response) =>
-      response.json()
-    )
-    return plants
-  } catch (error) {
-    throw new Error('Could not receive the data from API\n' + error)
-  }
-}
-
-onServerPrefetch(async () => {
-  plants.value = await fetchPlants()
-})
-
-onMounted(async () => {
-  if (!plants.value) {
-    plants.value = getPlantsLocal() || (await fetchPlants())
-  }
-})
+const plants = []
 </script>
 
 <template>
