@@ -1,13 +1,12 @@
-# Vue SPA vs SSR vs SSG vs ISR examples
+# Vite + Vue SSG example
 
-A simple house plant tracker app made with [Contentful](https://contentful.com) and [Vue.js](https://vuejs.org/), based on: [Contentful Vue Starter](https://github.com/contentful/starter-vue-tracker).
+A simple house plant tracker app made with [Contentful](https://contentful.com) and [Vue.js](https://vuejs.org/), based on [Contentful Vue Starter](https://github.com/contentful/starter-vue-tracker).
 
-This is an example repo to showcase the different rendering techniques of Vue app, such as:
+This is a Static Site Generation (SSG) example Vue app.
 
-- Single-Page Application (SPA).
-- Server-Side Rendering (SSR).
-- Static Site Generation (SSG).
-- Incremental Static Regeneration (ISR).
+It utilises Vercel serverless function to be used as API endpoint `/api/plants`.
+
+Data is fetched and static assets are prerendered on build.
 
 ## Features
 
@@ -40,7 +39,7 @@ From your Contentful space, go to **Content model** and add a new content type:
 Once the content model is saved, add these fields (you don't have to modify the settings unless specified):
 
 - `Common Name` - **Text** field (type **short text**).
-    - Under **Field Options** in Settings, check ***This field represents the Entry title***
+  - Under **Field Options** in Settings, check **_This field represents the Entry title_**
 - `Scientific Name` - **Rich Text** field.
 - `Image` - **Media** field.
 - `Last Watered` - **Date & time** field.
@@ -91,6 +90,6 @@ To deploy, run the following command and commit your changes to GitHub.
 npm run build
 ```
 
-Chose your favorite hosting provider such as Netlify or Vercel and create a new project. 
+Chose your favorite hosting provider such as Netlify or Vercel and create a new project.
 
-**NOTE:** You'll have to configure the ***VITE_CONTENTFUL_SPACE_ID*** and ***VITE_CONTENTFUL_ACCESS_TOKEN*** values.
+**NOTE:** You'll have to configure the **_VITE_CONTENTFUL_SPACE_ID_** and **_VITE_CONTENTFUL_ACCESS_TOKEN_** values.
