@@ -27,7 +27,12 @@ function getNumberOfDays(end) {
 </script>
 <template>
   <div class="plant">
-    <img :src="`${plant.image.url}?f=center&fit=fill&w=300&h=300`" :alt="plant.image.description" />
+    <img
+      :src="`${plant.image.url}?f=center&fit=fill&w=300&h=300`"
+      :alt="plant.image.description"
+      width="300"
+      height="300"
+    />
     <div class="plant-content">
       <div class="plant-header">
         <div class="plant-title">
