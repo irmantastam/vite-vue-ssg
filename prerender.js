@@ -22,6 +22,11 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
 })
 
 ;(async () => {
+  // Start the http server for API to be available during generation.
+  const {
+    server: { app, port }
+  } = await import('./server.js')
+
   // pre-render each route...
   for (const url of routesToPrerender) {
     const [appHtml, preloadLinks] = await render(url, manifest)
@@ -37,4 +42,8 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
 
   // done, delete .vite directory including ssr manifest
   fs.rmSync(toAbsolute('dist/static/.vite'), { recursive: true })
+
+  // Close the http server after static assets generation completes.
+  app.close()
+  console.log(`Completed! Server closed at http://localhost:${port}`)
 })()

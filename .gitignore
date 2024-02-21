@@ -29,6 +29,7 @@ coverage
 
 # local env files
 .env
+.env.*
 
 # vite-plugin-api-routes generated API handlers
 .api

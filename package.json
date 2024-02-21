@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build --ssrManifest .vite/ssr-manifest.json --outDir dist/static && npm run build:server && node prerender",
+    "dev": "node server",
+    "build": "npm run build:client && npm run build:server && cross-env NODE_ENV=production node prerender",
+    "build:client": "vite build --ssrManifest --outDir dist/static",
     "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
-    "preview": "vite preview",
+    "preview": "cross-env NODE_ENV=production node server",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
