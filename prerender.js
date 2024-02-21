@@ -45,5 +45,5 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
 
   // Close the http server after static assets generation completes.
   app.close()
-  console.log(`Completed! Server closed at http://localhost:${port}`)
+  console.log(`Server closed at http://localhost:${port}`)
 })()

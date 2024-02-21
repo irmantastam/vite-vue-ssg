@@ -8,7 +8,7 @@ import 'dotenv/config'
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
-const port = process.env.PORT || (isProduction ? 443 : 5173)
+const port = process.env.PORT || (isProduction ? 4173 : 5173)
 const base = process.env.BASE || '/'
 
 // Cached production assets
@@ -30,7 +30,10 @@ export const createServer = async () => {
     // 'custom', disabling Vite's own HTML serving logic so parent server
     // can take control
     vite = await createServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        fs: { deny: ['.env', '.env.*', '*.{crt,pem}', 'plants.js'] }
+      },
       appType: 'custom',
       base
     })

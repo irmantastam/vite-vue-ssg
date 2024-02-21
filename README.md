@@ -4,6 +4,8 @@ A simple house plant tracker app made with [Contentful](https://contentful.com) 
 
 This is a Static Site Generation (SSG) example Vue app.
 
+It utilises Vercel serverless function to be used as API endpoint `/api/plants`.
+
 Data is fetched and static assets are prerendered on build.
 
 ## Features
