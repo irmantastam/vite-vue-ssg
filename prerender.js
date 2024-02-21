@@ -4,6 +4,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import url from 'node:url'
+import process from 'node:process'
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -23,9 +24,13 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
 
 ;(async () => {
   // Start the http server for API to be available during generation.
-  const {
-    server: { app, port }
-  } = await import('./server.js')
+  let app
+  let port
+  if (!process.env.VERCEL_ENV) {
+    ;({
+      server: { app, port }
+    } = await import('./server.js'))
+  }
 
   // pre-render each route...
   for (const url of routesToPrerender) {
@@ -44,6 +49,8 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
   fs.rmSync(toAbsolute('dist/static/.vite'), { recursive: true })
 
   // Close the http server after static assets generation completes.
-  app.close()
-  console.log(`Server closed at http://localhost:${port}`)
+  if (!process.env.VERCEL_ENV) {
+    app.close()
+    console.log(`Server closed at http://localhost:${port}`)
+  }
 })()
