@@ -8,7 +8,7 @@ import 'dotenv/config'
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
-const port = process.env.PORT || (isProduction ? 4173 : 5173)
+const port = process.env.PORT || (isProduction ? 3000 : 5173)
 const base = process.env.BASE || '/'
 
 // Cached production assets
