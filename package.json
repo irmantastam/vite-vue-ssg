@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server",
-    "dev:vercel": "vercel dev --listen 5173",
+    "dev:vercel": "vercel dev --listen 5173 --local-config vercel.local.json",
     "build": "npm run build:client && npm run build:server && cross-env NODE_ENV=production node prerender",
     "build:client": "vite build --ssrManifest --outDir dist/static",
     "build:server": "vite build --ssr src/entry-server.js --outDir dist/server",
