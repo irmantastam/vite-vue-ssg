@@ -6,7 +6,7 @@ import path from 'node:path'
 import url from 'node:url'
 import process from 'node:process'
 
-const isVercel = process.env.VERCEL_ENV
+const isVercel = !!process.env.VERCEL_ENV
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
@@ -18,7 +18,7 @@ const manifest = JSON.parse(
 const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
-// determine routes to pre-render from src/pages
+// Determine routes to pre-render from src/pages.
 const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => {
   const name = file.replace(/Page\.vue$/, '').toLowerCase()
   return name === 'home' ? `/` : `/${name}`
@@ -26,6 +26,7 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
 
 ;(async () => {
   // Start the http server for API to be available during generation.
+  // Prevent starting server on Vercel since it has serverless API.
   let app
   let port
   if (!isVercel) {
@@ -46,9 +47,6 @@ const routesToPrerender = fs.readdirSync(toAbsolute('src/pages')).map((file) => 
     fs.writeFileSync(toAbsolute(filePath), html)
     console.log('pre-rendered:', filePath)
   }
-
-  // done, delete .vite directory including ssr manifest
-  fs.rmSync(toAbsolute('dist/static/.vite'), { recursive: true })
 
   // Close the http server after static assets generation completes.
   if (!isVercel) {
